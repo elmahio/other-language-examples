@@ -1,0 +1,1 @@
+Logging to elmah.io from Go. The example is copy pasted from the unofficial elmah.io Go package: https://github.com/JimiIT92/Elmah.io-Go

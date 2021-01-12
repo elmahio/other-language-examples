@@ -10,6 +10,8 @@ namespace App5
     [Application]
     public class MyApp : Application
     {
+        private IElmahioAPI api;
+
         public MyApp(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer) { }
 
@@ -21,11 +23,14 @@ namespace App5
 
         void MyApp_UnhandledExceptionHandler(object sender, RaiseThrowableEventArgs e)
         {
-            var api = ElmahioAPI.Create("API_KEY");
-
             var packageInfo = PackageManager.GetPackageInfo(PackageName, PackageInfoFlags.MetaData);
 
             // Do your error handling here.
+
+            if (api == null)
+            {
+                api = ElmahioAPI.Create("API_KEY");
+            }
 
             var exception = e.Exception;
             var baseException = exception?.GetBaseException();

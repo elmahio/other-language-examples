@@ -41,7 +41,7 @@ namespace App5
                 Detail = exception?.ToString(),
                 Severity = "Error",
                 Source = baseException?.Source,
-                Title = baseException.Message ?? "Unhandled Xamarin exception",
+                Title = baseException?.Message ?? "Unhandled Xamarin exception",
                 Type = baseException?.GetType().FullName,
                 Version = packageInfo.VersionName,
                 Application = packageInfo.PackageName,

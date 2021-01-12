@@ -27,15 +27,17 @@ namespace App5
 
             // Do your error handling here.
 
+            var exception = e.Exception;
+            var baseException = exception?.GetBaseException();
             api.Messages.Create("LOG_ID", new CreateMessage
             {
-                Data = e.Exception.ToDataList(),
+                Data = exception?.ToDataList(),
                 DateTime = DateTime.UtcNow,
-                Detail = e.Exception.ToString(),
+                Detail = exception?.ToString(),
                 Severity = "Error",
-                Source = e.Exception.Source,
-                Title = e.Exception.Message,
-                Type = e.Exception.GetType().FullName,
+                Source = baseException?.Source,
+                Title = baseException.Message ?? "Unhandled Xamarin exception",
+                Type = baseException?.GetType().FullName,
                 Version = packageInfo.VersionName,
                 Application = packageInfo.PackageName,
             });
